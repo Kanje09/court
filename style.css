@@ -1,0 +1,89 @@
+:root{
+  --bg:#1d4fa8; --bg2:#0a1f4d; --paper:#f7fbff; --ink:#10264d; --muted:#4f6b99;
+  --accent:#2f7de1; --accent-ink:#fff; --sky:#8ed1ff; --line:#cfe5fb;
+  box-sizing:border-box;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0e2a5e;
+    --bg2:#050f26;
+    --paper:#13264d;--ink:#e3f1ff;--muted:#9bbbe6;--line:#26427a;}
+}
+*{box-sizing:border-box}
+html{height:100%;-webkit-text-size-adjust:100%}
+body{
+  margin:0;min-height:100vh;min-height:100dvh;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);
+  background:radial-gradient(120% 90% at 50% 0%,var(--bg) 0%,var(--bg2) 100%) var(--bg2);
+  display:flex;align-items:center;justify-content:center;overflow-x:hidden;
+  padding:calc(env(safe-area-inset-top,0px) + 24px) calc(env(safe-area-inset-right,0px) + 16px) calc(env(safe-area-inset-bottom,0px) + 24px) calc(env(safe-area-inset-left,0px) + 16px);
+}
+.letter{
+  position:relative;width:100%;max-width:460px;background:var(--paper);border-radius:6px;
+  padding:40px 32px 32px;box-shadow:0 18px 50px rgba(0,0,0,.35);transform:rotate(-1.2deg);
+  background-image:repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px);
+  background-position:0 56px;
+}
+/* wax seal */
+.letter::before{
+  content:"♥";position:absolute;top:-18px;left:50%;margin-left:-22px;width:44px;height:44px;border-radius:50%;
+  background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:22px;
+  box-shadow:0 3px 8px rgba(0,0,0,.35);
+}
+.hi{font-family:'Caveat',cursive;font-size:28px;margin:0 0 4px;color:var(--muted)}
+h1{font-family:'Caveat',cursive;font-weight:700;font-size:clamp(44px,12vw,62px);line-height:1;margin:0 0 14px;color:var(--accent)}
+.tl{font-family:'Caveat',cursive;font-size:26px;margin:0 0 18px}
+p.body{line-height:32px;margin:0 0 22px;font-size:16px;max-width:60ch}
+.sign{font-family:'Caveat',cursive;font-size:30px;margin:0 0 26px;text-align:right}
+.actions{display:flex;gap:14px;align-items:center;justify-content:center;min-height:64px;flex-wrap:wrap}
+button{font:inherit;font-weight:700;border:0;border-radius:999px;cursor:pointer;padding:14px 26px;min-height:48px;transition:transform .15s ease;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#yes{background:var(--accent);color:var(--accent-ink);font-size:18px;box-shadow:0 6px 16px rgba(47,125,225,.45)}
+#yes:hover{transform:scale(1.06)}
+#no{background:transparent;color:var(--muted);border:2px solid var(--line);font-size:15px}
+#no.run{position:fixed;z-index:5;transition:left .25s ease,top .25s ease}
+button:focus-visible,input:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+.hint{text-align:center;font-size:14px;color:var(--muted);min-height:20px;margin:12px 0 0}
+
+.done{display:none;text-align:center}
+.done h2{font-family:'Caveat',cursive;font-size:clamp(40px,11vw,56px);color:var(--accent);margin:0 0 8px;line-height:1}
+.done p{line-height:1.6;margin:0 0 12px}
+.letter.yes .ask{display:none}
+.letter.yes .done{display:block}
+
+.heart{position:fixed;top:-30px;pointer-events:none;z-index:9;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(360deg);opacity:.9}}
+
+details{margin-top:26px;border-top:1px dashed var(--line);padding-top:12px;font-size:14px;color:var(--muted)}
+summary{cursor:pointer;padding:8px 0}
+.cfg{display:grid;gap:8px;margin-top:10px}
+.cfg input{font:inherit;font-size:16px;min-height:44px;padding:9px 12px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.cfg button{background:var(--ink);color:var(--paper);padding:10px 16px;font-size:14px}
+
+@media (prefers-reduced-motion:reduce){.heart{animation-duration:.01s!important}#no.run{transition:none}}
+
+/* ---------- Phones ---------- */
+@media (max-width:480px){
+  body{padding:calc(env(safe-area-inset-top,0px) + 34px) calc(env(safe-area-inset-right,0px) + 14px) calc(env(safe-area-inset-bottom,0px) + 20px) calc(env(safe-area-inset-left,0px) + 14px)}
+  .letter{padding:36px 20px 24px;transform:rotate(-.6deg);background-position:0 54px}
+  .hi{font-size:26px}
+  .tl{font-size:24px}
+  p.body{font-size:15px}
+  .sign{font-size:28px;margin-bottom:20px}
+  .actions{gap:10px}
+  .actions button{flex:1 1 130px;padding:14px 16px}
+  #yes{font-size:17px}
+}
+@media (max-width:360px){
+  .letter{padding:34px 16px 20px}
+  h1{font-size:42px}
+}
+/* Phones turned sideways */
+@media (max-height:520px){
+  body{align-items:flex-start;padding:calc(env(safe-area-inset-top,0px) + 30px) calc(env(safe-area-inset-right,0px) + 16px) calc(env(safe-area-inset-bottom,0px) + 16px) calc(env(safe-area-inset-left,0px) + 16px)}
+  .letter{max-width:560px}
+}
+
+/* iPhone 12 / 13 / 14 (390 x 844) */
+@media (width:390px) and (height:844px){
+  .letter{padding:38px 22px 26px}
+  h1{font-size:50px}
+}
